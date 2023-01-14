@@ -2,22 +2,22 @@ import styled from 'styled-components';
 import { Forms } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
 
-const Register = () => {
+const Login = () => {
   return (
     <Container>
       <Content>
         <Header>
           <Logo src={movix_logo} alt="movix_logo" />
           <H3>Hi, Welcome</H3>
-          <P>Please sign-up to start your own experience</P>
+          <P>Please sign-in to your account and start your experience</P>
+          <Forms isLogin={true} onSubmit={() => {}} />
         </Header>
-        <Forms isLogin={false} onSubmit={() => {}} />
       </Content>
     </Container>
   );
 };
 
-export default Register;
+export default Login;
 
 const Container = styled.div`
   display: flex;

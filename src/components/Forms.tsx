@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 // interface to check if it's a login or sign-up form
 interface RegisterFormProps {
   isLogin: boolean;
@@ -32,6 +33,15 @@ const Forms = ({ isLogin, onSubmit }: RegisterFormProps) => {
             <Button type="submit">Login</Button>
           )
         }
+
+        <LinkCtn>
+          <P>
+            {isLogin ? 'Don’t have an account?' : 'Already have an account?'}
+          </P>
+          <Link to={isLogin ? '/register' : '/login'}>
+            {isLogin ? 'Sign Up' : 'Login'}
+          </Link>
+        </LinkCtn>
       </Form>
     </Container>
   );
@@ -44,9 +54,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   background-color: #fff;
   color: #000;
+  width: 100%;
 `;
 
 const Form = styled.form`
@@ -55,13 +65,23 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  & > * {
+    margin-bottom: 16px;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 `;
 
-const FormGroup = styled.div``;
+const FormGroup = styled.div`
+  width: 100%;
+`;
 
 const Input = styled.input`
   padding: 0 12px;
-  width: 394px;
+  width: 100%;
   height: 51px;
   border: 1px solid rgba(76, 78, 100, 0.22);
   border-radius: 8px;
@@ -75,13 +95,12 @@ const Input = styled.input`
     font-weight: 500;
     font-size: 0.875rem;
     line-height: 19px;
-    font-feature-settings: 'liga' off, 'calt' off, 'kern' off;
     color: rgba(76, 78, 100, 0.38);
   }
 `;
 
 const Button = styled.button`
-  width: 394px;
+  width: 100%;
   height: 51px;
   /* robert-black */
   background: #000000;
@@ -98,4 +117,37 @@ const Button = styled.button`
   text-transform: uppercase;
   /* Light/Primary/Contrast */
   color: #ffffff;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const LinkCtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 16px;
+
+  & > a {
+    font-family: 'Work Sans', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 18px;
+    text-align: center;
+    color: #b91c1c;
+    margin-left: 8px;
+  }
+`;
+
+const P = styled.p`
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 18px;
+  text-align: center;
+  color: #747474;
 `;
