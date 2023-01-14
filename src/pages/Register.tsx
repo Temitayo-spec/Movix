@@ -1,50 +1,66 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../reduxStore/hooks';
+import { useAppDispatch, useAppSelector } from '../reduxStore/hooks';
 import {
-  selectUser,
   selectUserEmail,
-  selectUserName,
+//   selectUserName,
   selectUserPassword,
+  setUser,
 } from '../reduxStore/userSlice';
 import { useNavigate } from 'react-router-dom';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { Forms } from '../components';
+import { Forms, Spinner } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
 import { auth } from '../firebase/firebase-config';
 
 const Register = () => {
-  const name = useAppSelector(selectUserName);
+  const [loading, setLoading] = useState(false);
+  //   const name = useAppSelector(selectUserName);
   const email = useAppSelector(selectUserEmail);
   const password = useAppSelector(selectUserPassword);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // set the user to initial state
+    dispatch(
+      setUser({
+        name: '',
+        email: '',
+        password: '',
+      })
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // navigate to Login page
       navigate('/login');
-    } else {
-      // User is signed out
-      // ...
-      alert('User is signed out');
     }
   });
-    
+
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
       // navigate to Login page
       if (user) {
+        setLoading(false);
         navigate('/login');
       }
     } catch (error: any) {
       console.log('error', error.message);
     }
   };
+
+  if (loading) return <Spinner />;
   return (
     <Container>
       <Content>

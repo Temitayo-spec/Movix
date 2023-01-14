@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import styled from 'styled-components';
-import { Forms } from '../components';
+import { Forms, Spinner } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
 import { auth } from '../firebase/firebase-config';
 import { useAppSelector } from '../reduxStore/hooks';
 import { selectUserEmail, selectUserPassword } from '../reduxStore/userSlice';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+
   const email = useAppSelector(selectUserEmail);
   const password = useAppSelector(selectUserPassword);
   const navigate = useNavigate();
@@ -16,25 +19,25 @@ const Login = () => {
     if (user) {
       // navigate to Login page
       navigate('/home');
-    } else {
-      // User is signed out
-      // ...
-      alert('User is signed out');
     }
   });
 
   const onSubmit = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       // navigate to Login page
       if (user) {
+        setLoading(false);
         navigate('/home');
       }
     } catch (error: any) {
       console.log('error', error.message);
     }
   };
+
+  if (loading) return <Spinner />;
 
   return (
     <Container>
