@@ -5,7 +5,7 @@ interface RegisterFormProps {
   onSubmit: () => void;
 }
 
-const RegisterForm = ({ isLogin, onSubmit }: RegisterFormProps) => {
+const Forms = ({ isLogin, onSubmit }: RegisterFormProps) => {
   return (
     <Container>
       <Form onSubmit={onSubmit}>
@@ -37,7 +37,7 @@ const RegisterForm = ({ isLogin, onSubmit }: RegisterFormProps) => {
   );
 };
 
-export default RegisterForm;
+export default Forms;
 
 const Container = styled.div`
   display: flex;
