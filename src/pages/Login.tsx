@@ -1,8 +1,41 @@
+import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import styled from 'styled-components';
 import { Forms } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
+import { auth } from '../firebase/firebase-config';
+import { useAppSelector } from '../reduxStore/hooks';
+import { selectUserEmail, selectUserPassword } from '../reduxStore/userSlice';
 
 const Login = () => {
+  const email = useAppSelector(selectUserEmail);
+  const password = useAppSelector(selectUserPassword);
+  const navigate = useNavigate();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // navigate to Login page
+      navigate('/home');
+    } else {
+      // User is signed out
+      // ...
+      alert('User is signed out');
+    }
+  });
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      // navigate to Login page
+      if (user) {
+        navigate('/home');
+      }
+    } catch (error: any) {
+      console.log('error', error.message);
+    }
+  };
+
   return (
     <Container>
       <Content>
@@ -10,7 +43,7 @@ const Login = () => {
           <Logo src={movix_logo} alt="movix_logo" />
           <H3>Hi, Welcome</H3>
           <P>Please sign-in to your account and start your experience</P>
-          <Forms isLogin={true} onSubmit={() => {}} />
+          <Forms isLogin={true} onSubmit={onSubmit} />
         </Header>
       </Content>
     </Container>

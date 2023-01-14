@@ -1,10 +1,49 @@
 import styled from 'styled-components';
+import { useAppSelector } from '../reduxStore/hooks';
+import {
+  selectUser,
+  selectUserEmail,
+  selectUserName,
+  selectUserPassword,
+} from '../reduxStore/userSlice';
+import { useNavigate } from 'react-router-dom';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { Forms } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
+import { auth } from '../firebase/firebase-config';
 
 const Register = () => {
-  const onSubmit = async() => {
-     
+  const name = useAppSelector(selectUserName);
+  const email = useAppSelector(selectUserEmail);
+  const password = useAppSelector(selectUserPassword);
+
+  const navigate = useNavigate();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // navigate to Login page
+      navigate('/login');
+    } else {
+      // User is signed out
+      // ...
+      alert('User is signed out');
+    }
+  });
+    
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      // navigate to Login page
+      if (user) {
+        navigate('/login');
+      }
+    } catch (error: any) {
+      console.log('error', error.message);
+    }
   };
   return (
     <Container>

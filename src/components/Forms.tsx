@@ -1,12 +1,26 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../reduxStore/hooks';
+import {
+  selectUserEmail,
+  selectUserName,
+  selectUserPassword,
+  setUser,
+} from '../reduxStore/userSlice';
 // interface to check if it's a login or sign-up form
 interface RegisterFormProps {
   isLogin: boolean;
-  onSubmit: () => void;
+  onSubmit: (e: any) => Promise<void>;
 }
 
 const Forms = ({ isLogin, onSubmit }: RegisterFormProps) => {
+  const name = useAppSelector(selectUserName);
+  const email = useAppSelector(selectUserEmail);
+  const password = useAppSelector(selectUserPassword);
+
+  // initialize the useDispatch hook
+  const dispatch = useAppDispatch();
+
   return (
     <Container>
       <Form onSubmit={onSubmit}>
@@ -14,15 +28,36 @@ const Forms = ({ isLogin, onSubmit }: RegisterFormProps) => {
           // if it's a sign-up form, display the name input
           !isLogin && (
             <FormGroup>
-              <Input type="text" placeholder="Full Name" />
+              <Input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e: { target: { value: any } }) => {
+                  dispatch(setUser({ name: e.target.value, email, password }));
+                }}
+              />
             </FormGroup>
           )
         }
         <FormGroup>
-          <Input type="email" placeholder="Email" />
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e: { target: { value: any } }) => {
+              dispatch(setUser({ name, email: e.target.value, password }));
+            }}
+          />
         </FormGroup>
         <FormGroup>
-          <Input type="password" placeholder="Password" />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e: { target: { value: any } }) => {
+              dispatch(setUser({ name, email, password: e.target.value }));
+            }}
+          />
         </FormGroup>
         {
           // if it's a sign-up form, display the Register button

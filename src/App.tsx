@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import { Login, Register } from './pages';
+import { Login, Register, Home } from './pages';
 
 function App() {
   return (
@@ -8,8 +8,9 @@ function App() {
       {/* Display Login or SignUp Screen before the user is logged in */}
       <Router>
         <Routes>
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
     </Container>
