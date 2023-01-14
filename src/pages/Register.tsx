@@ -3,6 +3,9 @@ import { Forms } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
 
 const Register = () => {
+  const onSubmit = async() => {
+     
+  };
   return (
     <Container>
       <Content>
@@ -11,7 +14,7 @@ const Register = () => {
           <H3>Hi, Welcome</H3>
           <P>Please sign-up to start your own experience</P>
         </Header>
-        <Forms isLogin={false} onSubmit={() => {}} />
+        <Forms isLogin={false} onSubmit={onSubmit} />
       </Content>
     </Container>
   );
