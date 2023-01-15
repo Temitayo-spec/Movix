@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import tv from '../components/assets/tv.png';
-import Search from './Search';
+import tv from '../../components/assets/tv.png';
+import Search from '../General/Search';
 import User from './User';
 
 const Header = () => {
@@ -24,6 +24,10 @@ const Container = styled.div`
   width: 100%;
   height: 80px;
   background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
 `;
 
 const Inner = styled.div`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useAppSelector } from '../reduxStore/hooks';
-import { selectUserName } from '../reduxStore/userSlice';
-import burger from '../components/assets/burger.svg';
+import { useAppSelector } from '../../reduxStore/hooks';
+import { selectUserName } from '../../reduxStore/userSlice';
+import burger from '../assets/svgs/burger.svg';
 
 const User = () => {
   const name = useAppSelector(selectUserName);

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../reduxStore/hooks';
+import { useAppDispatch, useAppSelector } from '../../reduxStore/hooks';
 import {
   selectUserEmail,
   selectUserName,
   selectUserPassword,
   setUser,
-} from '../reduxStore/userSlice';
+} from '../../reduxStore/userSlice';
 // interface to check if it's a login or sign-up form
 interface RegisterFormProps {
   isLogin: boolean;
