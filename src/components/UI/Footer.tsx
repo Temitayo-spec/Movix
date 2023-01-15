@@ -24,7 +24,7 @@ export default Footer;
 
 const FooterContainer = styled.footer`
   width: 100%;
-  height: 100%;
+  height: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,4 +53,8 @@ const FooterText = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  color: #6b7280;
 `;
