@@ -1,35 +1,55 @@
 import styled from 'styled-components';
 import ChangeMovie from './ChangeMovie';
-import poster from '../assets/Poster.png';
 import imdb from '../assets/imdb.png';
 import tomato from '../assets/tomato.png';
 import play from '../assets/svgs/ic-play.svg';
+import { useEffect, useState } from 'react';
+import { fetchMovie } from '../../api/fetchMovie';
+import { baseImageLink } from '../../link';
 
 const Banner = () => {
+  const [movie, setMovie] = useState<any>([]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchAPI = async () => {
+    setMovie(await fetchMovie());
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
+
+  console.log(movie);
   return (
     <Container>
-      <Image src={poster} alt="Banner_img" />
+      <Image
+        src={`${baseImageLink}/${movie?.backdrop_path}`}
+        alt="Banner_img"
+      />
       <MainContent>
         <MainContentInner>
           <LHS>
-            <Title>
-              John Wick 3 : <span>Paraballum</span>
-            </Title>
+            <Title>{movie?.title || movie?.name || movie?.original_name}</Title>
             <RatingContainer>
               <IMDBRating>
                 <img src={imdb} alt="IMDB" />
-                <span>88.6/100</span>
+                <span>{movie?.vote_average * 10} / 100</span>
               </IMDBRating>
               <TomatoRating>
                 <img src={tomato} alt="Tomato" />
-                <span>97</span>
+                <span>
+                  {
+                    // eslint-disable-next-line no-nested-ternary
+                    movie?.vote_average > 7
+                      ? 'Fresh'
+                      : movie?.vote_average > 5
+                      ? 'Rotten'
+                      : 'Bad'
+                  }
+                </span>
               </TomatoRating>
             </RatingContainer>
-            <Description>
-              John Wick is on the run after killing a member of the
-              international assassins' guild, and with a $14 million price tag
-              on his head, he is the target of hit men and women everywhere.
-            </Description>
+            <Description>{movie?.overview}</Description>
             <ButtonContainer>
               <TrailerButton>
                 <img src={play} alt="Trailer" /> Watch Trailer
@@ -37,7 +57,7 @@ const Banner = () => {
             </ButtonContainer>
           </LHS>
           <RHS>
-            <ChangeMovie />
+            <ChangeMovie fetchMovie={fetchAPI} />
           </RHS>
         </MainContentInner>
       </MainContent>
@@ -112,7 +132,7 @@ const RatingContainer = styled.div`
 const IMDBRating = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 1rem;
+  margin-right: 2rem;
   img {
     height: 1.5rem;
     width: 1.5rem;
@@ -130,9 +150,8 @@ const TomatoRating = styled.div`
   display: flex;
   align-items: center;
   img {
-    height: 1.5rem;
-    width: 1.5rem;
     margin-right: 0.5rem;
+    object-fit: contain;
   }
   span {
     font-weight: 400;

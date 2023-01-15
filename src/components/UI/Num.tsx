@@ -1,15 +1,17 @@
-import { NumProps } from '../../../typings';
+import { NumProps } from '../../typings';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hooks';
 import { selectNum, setActive, setNum } from '../../reduxStore/numSlice';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
-const Num = ({ num }: NumProps) => {
+const Num = ({ num, fetchMovie }: NumProps) => {
   const numRef = useRef(null);
   const dispatch = useAppDispatch();
   const nums = useAppSelector(selectNum);
   // if number is clicked then change the background color
   const handleClick = () => {
+    fetchMovie();
+
     if (num === 1) {
       dispatch(setNum(1));
       dispatch(setActive(true));
@@ -19,14 +21,11 @@ const Num = ({ num }: NumProps) => {
     } else if (num === 3) {
       dispatch(setNum(3));
       dispatch(setActive(true));
-      setActive(true);
     } else if (num === 4) {
       dispatch(setNum(4));
-      setActive(true);
       dispatch(setActive(true));
     } else if (num === 5) {
       dispatch(setNum(5));
-      setActive(true);
       dispatch(setActive(true));
     }
   };
@@ -76,7 +75,7 @@ const Number = styled.p`
   &.active {
     font-size: 16px;
     color: #fff;
-    
+
     &::before {
       position: absolute;
       left: -20px;

@@ -1,0 +1,114 @@
+import styled from 'styled-components';
+import { CardProps } from '../../typings';
+import imdbImg from '../assets/imdb.png';
+import tomatoImg from '../assets/tomato.png';
+
+const Card = ({ src, title, imdb, tomato, genre, country }: CardProps) => {
+  return (
+    <Container>
+      <Image src={src} alt="Banner_img" />
+      <MainContent>
+        <Country>{country}</Country>
+        <Title>{title}</Title>
+        <RatingContainer>
+          <IMDBRating>
+            <img src={imdbImg} alt="IMDB" />
+            <span>{imdb}</span>
+          </IMDBRating>
+          <TomatoRating>
+            <img src={tomatoImg} alt="Tomato" />
+            <span>{tomato}</span>
+          </TomatoRating>
+        </RatingContainer>
+        <Description>{genre}</Description>
+      </MainContent>
+    </Container>
+  );
+};
+
+export default Card;
+
+const Container = styled.div`
+  font-family: 'DM Sans', sans-serif;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const Image = styled.img`
+  height: 370px;
+  width: 100%;
+  object-fit: contain;
+`;
+
+const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+`;
+
+const Country = styled.p`
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 16px;
+  color: #9ca3af;
+`;
+
+const Title = styled.h1`
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 23px;
+  color: #111827;
+`;
+
+const RatingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px 0;
+`;
+
+const IMDBRating = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+  img {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.5rem;
+    object-fit: contain;
+  }
+  span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+  }
+`;
+
+const TomatoRating = styled.div`
+  display: flex;
+  align-items: center;
+  img {
+    margin-right: 0.5rem;
+    object-fit: contain;
+  }
+  span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+  }
+`;
+
+const Description = styled.p`
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 16px;
+  color: #9ca3af;
+`;

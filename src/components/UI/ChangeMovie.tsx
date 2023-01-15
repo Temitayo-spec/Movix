@@ -1,14 +1,13 @@
 import styled from 'styled-components';
+import { ChangeMovieProps } from '../../typings';
 import Num from './Num';
 
-type Props = {};
-
-const ChangeMovie = (props: Props) => {
+const ChangeMovie = ({ fetchMovie }: ChangeMovieProps) => {
   const num = [1, 2, 3, 4, 5];
   return (
     <Container>
       {num.map((item) => (
-        <Num num={item} key={item} />
+        <Num num={item} key={item} fetchMovie={fetchMovie} />
       ))}
     </Container>
   );
