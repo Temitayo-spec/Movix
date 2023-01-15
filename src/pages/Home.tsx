@@ -5,6 +5,7 @@ import { auth } from '../firebase/firebase-config';
 import styled from 'styled-components';
 import requests from '../axios/request';
 import CastRow from '../components/UI/CastRow';
+import Footer from '../components/UI/Footer';
 
 const Home = () => {
   return (
@@ -23,13 +24,7 @@ const Home = () => {
         isLargeRow
       />
       <CastRow title="Featured Cast" fetchUrl={requests.fetchFeaturedCasts} />
-      <button
-        onClick={() => {
-          signOut(auth);
-        }}
-      >
-        log out
-      </button>
+      <Footer />
     </Wrapper>
   );
 };
