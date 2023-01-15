@@ -6,7 +6,7 @@ import { RowProps } from '../../typings';
 import cheveronRight from '../assets/svgs/ic-chevron-right.svg';
 import Card from '../General/Card';
 
-const Row = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
+const CastRow = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ const Row = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(movies, 'featured');
   return (
     <Container>
       <Header>
@@ -35,13 +36,11 @@ const Row = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
               <Card
                 key={key}
                 src={`${baseImageLink}/${
-                  isLargeRow ? item?.poster_path : item?.backdrop_path
+                  isLargeRow
+                    ? item?.profile_path
+                    : item?.profile_path
                 }`}
-                title={item?.title}
-                imdb={item?.vote_average}
-                tomato={item?.vote_average}
-                genre={item?.genre}
-                country={item?.original_language === 'en' ? 'USA' : 'Nigeria'}
+                title={item?.name}
               />
             </Wrapper>
           );
@@ -51,7 +50,7 @@ const Row = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
   );
 };
 
-export default Row;
+export default CastRow;
 
 const Container = styled.div`
   width: 90%;

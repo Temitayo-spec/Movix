@@ -10,16 +10,22 @@ const Card = ({ src, title, imdb, tomato, genre, country }: CardProps) => {
       <MainContent>
         <Country>{country}</Country>
         <Title>{title}</Title>
-        <RatingContainer>
-          <IMDBRating>
-            <img src={imdbImg} alt="IMDB" />
-            <span>{imdb}</span>
-          </IMDBRating>
-          <TomatoRating>
-            <img src={tomatoImg} alt="Tomato" />
-            <span>{tomato}</span>
-          </TomatoRating>
-        </RatingContainer>
+        {!imdb && !tomato ? null : (
+          <RatingContainer>
+            <IMDBRating>
+              <img src={imdbImg} alt="IMDB" />
+              <span>{(imdb as number) * 10} / 100</span>
+            </IMDBRating>
+            <TomatoRating>
+              <img src={tomatoImg} alt="Tomato" />
+              {(tomato as number) * 10 > 60 ? (
+                <span style={{ color: '#2ecc71' }}>Fresh</span>
+              ) : (
+                <span style={{ color: '#e74c3c' }}>Rotten</span>
+              )}
+            </TomatoRating>
+          </RatingContainer>
+        )}
         <Description>{genre}</Description>
       </MainContent>
     </Container>
@@ -30,7 +36,7 @@ export default Card;
 
 const Container = styled.div`
   font-family: 'DM Sans', sans-serif;
-  width: 100%;
+  width: 250px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -42,7 +48,7 @@ const Container = styled.div`
 `;
 
 const Image = styled.img`
-  height: 370px;
+  max-height: 370px;
   width: 100%;
   object-fit: contain;
 `;
@@ -51,6 +57,7 @@ const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  width: 100%;
 `;
 
 const Country = styled.p`
