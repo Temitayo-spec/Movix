@@ -1,11 +1,11 @@
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import { Header } from '../components';
 import { auth } from '../firebase/firebase-config';
 
 const Home = () => {
   return (
     <div>
-      Home
+      <Header />
       <button
         onClick={() => {
           signOut(auth);

@@ -7,3 +7,4 @@ declare module 'react-redux';
 declare module 'redux-persist';
 declare module 'redux-persist/lib/storage';
 declare module 'redux-persist/integration/react';
+declare module 'react-icons/fa';
