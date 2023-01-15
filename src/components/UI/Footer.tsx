@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+import fb from '../assets/svgs/ic-fb.svg';
+import instagram from '../assets/svgs/ic-instagram.svg';
+import twitter from '../assets/svgs/ic-twitter.svg';
+import youtube from '../assets/svgs/ic-youtube.svg';
 
 const Footer = () => {
   return (
