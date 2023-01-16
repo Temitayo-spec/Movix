@@ -7,6 +7,7 @@ import movix_logo from '../components/assets/movix_logo.png';
 import { auth } from '../firebase/firebase-config';
 import { useAppSelector } from '../reduxStore/hooks';
 import { selectUserEmail, selectUserPassword } from '../reduxStore/userSlice';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,12 @@ const Login = () => {
         navigate('/home');
       }
     } catch (error: any) {
-      console.log('error', error.message);
+      setLoading(false);
+      toast.error(
+        error.message.includes('password')
+          ? 'Invalid password'
+          : 'Invalid email'
+      );
     }
   };
 

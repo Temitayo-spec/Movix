@@ -73,7 +73,7 @@ const Forms = ({ isLogin, onSubmit }: RegisterFormProps) => {
           <P>
             {isLogin ? 'Don’t have an account?' : 'Already have an account?'}
           </P>
-          <Link to={isLogin ? '/register' : '/login'}>
+          <Link to={isLogin ? '/' : '/login'}>
             {isLogin ? 'Sign Up' : 'Login'}
           </Link>
         </LinkCtn>

@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../reduxStore/hooks';
 import { selectUserName } from '../../reduxStore/userSlice';
 import burger from '../assets/svgs/burger.svg';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase/firebase-config';
+import { useNavigate } from 'react-router-dom';
 
 const User = () => {
   const name = useAppSelector(selectUserName);
+  const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   return (
     <Container>
@@ -14,7 +18,14 @@ const User = () => {
         <Burger src={burger} alt="burger" />
       </BurgerContainer>
       <Dropdown className={toggle ? 'toggle' : ''}>
-        <DropdownItem type="button" onClick={() => setToggle(!toggle)}>
+        <DropdownItem
+          type="button"
+          onClick={() => {
+            signOut(auth);
+            navigate('/login');
+            setToggle(!toggle);
+          }}
+        >
           Logout
         </DropdownItem>
       </Dropdown>

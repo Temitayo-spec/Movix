@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../reduxStore/hooks';
 import {
   selectUserEmail,
-//   selectUserName,
+  //   selectUserName,
   selectUserPassword,
   setUser,
 } from '../reduxStore/userSlice';
@@ -15,6 +15,7 @@ import {
 import { Forms, Spinner } from '../components';
 import movix_logo from '../components/assets/movix_logo.png';
 import { auth } from '../firebase/firebase-config';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const Register = () => {
         password: '',
       })
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   onAuthStateChanged(auth, (user) => {
@@ -56,7 +57,12 @@ const Register = () => {
         navigate('/login');
       }
     } catch (error: any) {
-      console.log('error', error.message);
+      setLoading(false);
+      toast.error(
+        error.message.includes('email')
+          ? 'Email already exists'
+          : 'Something went wrong'
+      );
     }
   };
 
