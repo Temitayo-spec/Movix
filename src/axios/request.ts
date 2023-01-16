@@ -19,6 +19,7 @@ const requests = {
   fetchNewArrivals: `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${
     Math.floor(Math.random() * 10) + 1
   }`,
+  searchMovie: `/search/movie?api_key=${API_KEY}&query=`,
 };
 
 export default requests;

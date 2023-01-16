@@ -6,6 +6,7 @@ import play from '../assets/svgs/ic-play.svg';
 import { useEffect, useState } from 'react';
 import { fetchMovie } from '../../api/fetchMovie';
 import { baseImageLink } from '../../link';
+import Spinner from '../General/Spinner';
 
 const Banner = () => {
   const [movie, setMovie] = useState<any>([]);
@@ -18,6 +19,10 @@ const Banner = () => {
   useEffect(() => {
     fetchAPI();
   }, []);
+
+  if (movie.length === 0) {
+    return <Spinner />;
+  }
 
   console.log(movie);
   return (

@@ -5,7 +5,6 @@ import { selectUserName } from '../../reduxStore/userSlice';
 import burger from '../assets/svgs/burger.svg';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase/firebase-config';
-import { useNavigate } from 'react-router-dom';
 
 const User = () => {
   const name = useAppSelector(selectUserName);
