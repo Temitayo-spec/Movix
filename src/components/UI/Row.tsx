@@ -5,6 +5,7 @@ import { baseImageLink } from '../../link';
 import { RowProps } from '../../typings';
 import cheveronRight from '../assets/svgs/ic-chevron-right.svg';
 import Card from '../General/Card';
+import CarouselComp from '../General/CarouselComp';
 
 const Row = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
   const [movies, setMovies] = useState([]);
@@ -28,25 +29,25 @@ const Row = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
           </span>
         </More>
       </Header>
-      <Content>
+      <CarouselComp>
         {movies?.map((item: any, key) => {
           return (
-            <Wrapper className={isLargeRow ? 'largeRow' : 'smallRow'}>
+            <Wrapper key={key} className={isLargeRow ? 'largeRow' : 'smallRow'}>
               <Card
-                key={key}
                 src={`${baseImageLink}/${
                   isLargeRow ? item?.poster_path : item?.backdrop_path
                 }`}
                 title={item?.title}
                 imdb={item?.vote_average}
                 tomato={item?.vote_average}
-                genre={item?.genre}
-                country={item?.original_language === 'en' ? 'USA' : 'Nigeria'}
+                genre={item?.genre_ids}
+                country={item?.original_language === 'en' ? 'USA' : 'Asia'}
               />
             </Wrapper>
           );
         })}
-      </Content>
+      </CarouselComp>
+      {/* <Content></Content> */}
     </Container>
   );
 };
@@ -110,14 +111,3 @@ const Wrapper = styled.div`
   }
 `;
 
-const Content = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  overflow-y: hidden;
-  overflow-x: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;

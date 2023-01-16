@@ -8,7 +8,7 @@ interface CardProps {
   title: string;
   imdb?: number;
   tomato?: number;
-  genre?: string;
+  genre?: Array<number>;
   country?: string;
 }
 
@@ -26,4 +26,21 @@ interface FetchProps {
   fetchUrl: string;
 }
 
-export type { NumProps, CardProps, ChangeMovieProps, RowProps, FetchProps };
+interface CarouselProps {
+  children: React.ReactNode;
+}
+
+interface CustomArrowProps {
+  next: () => void;
+  previous: () => void;
+}
+
+export type {
+  NumProps,
+  CardProps,
+  ChangeMovieProps,
+  RowProps,
+  FetchProps,
+  CarouselProps,
+  CustomArrowProps,
+};

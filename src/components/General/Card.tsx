@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import styled from 'styled-components';
 import { CardProps } from '../../typings';
 import imdbImg from '../assets/imdb.png';
@@ -26,7 +27,51 @@ const Card = ({ src, title, imdb, tomato, genre, country }: CardProps) => {
             </TomatoRating>
           </RatingContainer>
         )}
-        <Description>{genre}</Description>
+        <Description>
+          {genre
+            ?.map((g) => {
+              if (g === 28) {
+                return 'Action';
+              } else if (g === 12) {
+                return 'Adventure';
+              } else if (g === 16) {
+                return 'Animation';
+              } else if (g === 35) {
+                return 'Comedy';
+              } else if (g === 80) {
+                return 'Crime';
+              } else if (g === 99) {
+                return 'Documentary';
+              } else if (g === 18) {
+                return 'Drama';
+              } else if (g === 10751) {
+                return 'Family';
+              } else if (g === 14) {
+                return 'Fantasy';
+              } else if (g === 36) {
+                return 'History';
+              } else if (g === 27) {
+                return 'Horror';
+              } else if (g === 10402) {
+                return 'Music';
+              } else if (g === 9648) {
+                return 'Mystery';
+              } else if (g === 10749) {
+                return 'Romance';
+              } else if (g === 878) {
+                return 'Science Fiction';
+              } else if (g === 10770) {
+                return 'TV Movie';
+              } else if (g === 53) {
+                return 'Thriller';
+              } else if (g === 10752) {
+                return 'War';
+              } else if (g === 37) {
+                return 'Western';
+              }
+            })
+            .join(', ')}
+        </Description>
       </MainContent>
     </Container>
   );

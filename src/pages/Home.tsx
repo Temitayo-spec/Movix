@@ -15,7 +15,12 @@ const Home = () => {
         fetchUrl={requests.fetchFeaturedMovies}
         isLargeRow
       />
-      <Row title="New Arrival" fetchUrl={requests.fetchNewArrivals} />
+
+      <Row
+        title="New Arrival"
+        fetchUrl={requests.fetchNewArrivals}
+        isLargeRow
+      />
       <Row
         title="Exclusive Videos"
         fetchUrl={requests.fetchExclusiveVideos}

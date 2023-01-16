@@ -32,13 +32,10 @@ const CastRow = ({ title, fetchUrl, isLargeRow = false }: RowProps) => {
       <Content>
         {movies?.map((item: any, key) => {
           return (
-            <Wrapper className={isLargeRow ? 'largeRow' : 'smallRow'}>
+            <Wrapper key={key} className={isLargeRow ? 'largeRow' : 'smallRow'}>
               <Card
-                key={key}
                 src={`${baseImageLink}/${
-                  isLargeRow
-                    ? item?.profile_path
-                    : item?.profile_path
+                  isLargeRow ? item?.profile_path : item?.profile_path
                 }`}
                 title={item?.name}
               />
