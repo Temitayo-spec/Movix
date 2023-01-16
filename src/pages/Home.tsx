@@ -1,7 +1,5 @@
-import { signOut } from 'firebase/auth';
 import { Header, Row } from '../components';
 import Banner from '../components/UI/Banner';
-import { auth } from '../firebase/firebase-config';
 import styled from 'styled-components';
 import requests from '../axios/request';
 import CastRow from '../components/UI/CastRow';

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fb from '../assets/svgs/ic-fb.svg';
 import instagram from '../assets/svgs/ic-instagram.svg';
@@ -13,6 +14,11 @@ const Footer = () => {
         <SocialIcon src={instagram} alt="Instagram" />
         <SocialIcon src={youtube} alt="Youtube" />
       </SocialContainer>
+      <LinksContainer>
+        <Link to="#">Conditions of Use</Link>
+        <Link to="#">Privacy & Policy</Link>
+        <Link to="#">Press Room</Link>
+      </LinksContainer>
       <FooterText>
         <p>© 2021 Movix</p>
       </FooterText>
@@ -30,10 +36,8 @@ const FooterContainer = styled.footer`
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  padding: 20px 0;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.8rem;
-  color: #000000;
   gap: 20px;
 `;
 
@@ -46,6 +50,18 @@ const SocialIcon = styled.img`
   width: 30px;
   height: 30px;
   cursor: pointer;
+`;
+
+const LinksContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 23px;
+    color: #111827;
+  }
 `;
 
 const FooterText = styled.div`
