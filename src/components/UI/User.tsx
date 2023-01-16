@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 const User = () => {
   const name = useAppSelector(selectUserName);
-  const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   return (
     <Container>
