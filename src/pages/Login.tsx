@@ -32,6 +32,7 @@ const Login = () => {
       if (user) {
         setLoading(false);
         navigate('/home');
+        toast.success('Login successful');
       }
     } catch (error: any) {
       setLoading(false);

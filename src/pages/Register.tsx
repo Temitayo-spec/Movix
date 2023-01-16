@@ -55,6 +55,7 @@ const Register = () => {
       if (user) {
         setLoading(false);
         navigate('/login');
+        toast.success('Account created successfully');
       }
     } catch (error: any) {
       setLoading(false);

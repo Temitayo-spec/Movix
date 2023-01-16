@@ -22,7 +22,7 @@ const User = () => {
           type="button"
           onClick={() => {
             signOut(auth);
-            navigate('/login');
+            window.location.pathname = '/login';
             setToggle(!toggle);
           }}
         >
